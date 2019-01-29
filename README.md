@@ -2,7 +2,7 @@
 
 个人兴趣使然 无任何商业用途
 
-![1](C:\Develop\github仓库\Community\public\img\logo3.png)
+![logo](https://github.com/Chad97/Community/blob/master/public/img/logo3.png)
 
 ###  技术栈
 
