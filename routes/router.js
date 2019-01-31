@@ -20,7 +20,7 @@ router.get('/login', function (req,res) {
     res.render('login.html')
 })
 
-router.post('/login', function (req,res) {
+router.post('/login', function (req, res, next) {
     //1 获取表单数据
     //2 查询用户名密码是否正确
     //3 发送响应数据
@@ -33,10 +33,7 @@ router.post('/login', function (req,res) {
         ]
     },function (err,user) {
         if (err) {
-            return res.status(500).json({
-                err_code: 2,
-                message: err.message
-            })   
+            return next(err)  
         }
 
         if (!user) {
@@ -60,7 +57,7 @@ router.get('/register', function (req, res) {
     res.render('register.html')
 })
 
-router.post('/register', function (req,res) {
+router.post('/register', function (req, res, next) {
      //1 获取表单提交到数据 req.body
      //2 操作数据库 判断该用户是否存在
      //3 发送响应
@@ -72,10 +69,7 @@ router.post('/register', function (req,res) {
      }, 
      function (err, data) {
         if (err) {
-          return res.status(500).json({
-              err_code: 2,
-              message: '服务端错误'
-          })
+          return next(err)
         }
         if (data) {//邮箱或昵称已存在
             return res.status(200).json({
@@ -89,10 +83,7 @@ router.post('/register', function (req,res) {
 
         new User(body).save(function (err, user) {
             if (err) {
-                return res.status(500).json({
-                    err_code: 2,
-                    message: '服务端错误'
-                }) 
+                return next(err) 
             }
 
             //注册成功，使用session 记录用户的登录状态
